@@ -10,7 +10,7 @@ import (
 func main() {
 	conf := readConfig()
 
-	listenAt := fmt.Sprintf(":%d", conf.port)
+	listenAt := fmt.Sprintf(":%d", conf.Port)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		responseFormat := r.URL.Query().Get("format")
 		if responseFormat == "json" {
@@ -25,10 +25,6 @@ func main() {
 		fmt.Fprintf(w, "Hello, World!")
 	})
 
-	http.HandleFunc("/foo", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "bar")
-	})
-
-	log.Printf("Open the following URL in the browser: http://localhost:%d\n", conf.port)
+	log.Printf("Open the following URL in the browser: http://localhost:%d\n", conf.Port)
 	log.Fatal(http.ListenAndServe(listenAt, nil))
 }

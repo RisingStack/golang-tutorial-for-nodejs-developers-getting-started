@@ -1,28 +1,21 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"strconv"
+	"github.com/kelseyhightower/envconfig"
 )
 
 type config struct {
-	port int
+	Port int `default:"8000"`
 }
 
 func readConfig() config {
-	portString := os.Getenv("PORT")
-	if portString == "" {
-		portString = "8000"
-	}
+	var c config
 
-	port, err := strconv.Atoi(portString)
+	err := envconfig.Process("", &c)
 
 	if err != nil {
-		panic(fmt.Sprintf("Could not parse %s to int", portString))
+		panic(err)
 	}
 
-	return config{
-		Port: port,
-	}
+	return c
 }
