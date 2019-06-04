@@ -3,10 +3,10 @@ start: build
 	build/server
 
 .PHONY: build
-build: server
-server: $(wildcard *.go) $(wildcard **/*.go)
-	mkdir -p build
-	go build -o build/server	
+build: build/server
+build/server: $(wildcard *.go) $(wildcard **/*.go)
+	mkdir -p $(dir $@)
+	go build -o $@
 
 ## GIT HOOKS
 GITHOOKS_SOURCE := ./githooks
