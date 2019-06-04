@@ -1,12 +1,12 @@
-.PHONY: serve
+.PHONY: start
 start: build
-	./server
+	build/server
 
 .PHONY: build
 build: server
-SOURCES := 
 server: $(wildcard *.go) $(wildcard **/*.go)
-	go build -o server	
+	mkdir -p build
+	go build -o build/server	
 
 ## GIT HOOKS
 GITHOOKS_SOURCE := ./githooks
